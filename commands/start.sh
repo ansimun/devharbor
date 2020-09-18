@@ -17,14 +17,18 @@ function start {
   fi
 
   if [ "$container_running" = false ] && [ "$container_existing" = false ]; then
-    echo "ruby-dock : creating + starting container ruby-dock"
+    echo "devharbor : container $projectname not found"
+    echo "devharbor : creating / attaching to container"
     winpty docker run -it --name $projectname --mount type=bind,source="$workingsetsdir/$projectname",target=/usr/app $projectname
   elif [ "$container_running" = true ]; then
-    echo "ruby-dock : attaching to container $projectname"
+    echo "devharbor : container $projectname running"
+    echo "devharbor : attaching to container"
     winpty docker attach $projectname
   elif [ "$container_existing" = true ]; then
-    echo "ruby-dock : starting container ruby-dock"
+    echo "devharbor : container $projectname found"
+    echo "devharbor : starting container"
     docker container start $projectname >/dev/null
+    echo "devharbor : attaching to container"
     winpty docker attach $projectname
   fi
 }
