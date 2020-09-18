@@ -3,6 +3,7 @@
 function start {
   workingsetsdir="$1"
   projectname="$2"
+  attach="$3"
 
   container_running=true
   container_existing=true;
@@ -16,18 +17,19 @@ function start {
     fi
   fi
 
-  if [ "$container_running" = false ] && [ "$container_existing" = false ]; then
+  if [ "$container_existing" = false ]; then
     echo "devharbor : container $projectname not found"
-    echo "devharbor : creating / attaching to container"
-    winpty docker run -it --name $projectname --mount type=bind,source="$workingsetsdir/$projectname",target=/usr/app $projectname
-  elif [ "$container_running" = true ]; then
-    echo "devharbor : container $projectname running"
-    echo "devharbor : attaching to container"
-    winpty docker attach $projectname
-  elif [ "$container_existing" = true ]; then
-    echo "devharbor : container $projectname found"
+    echo "devharbor : creating and starting container"
+    docker run -it -d --name $projectname --mount type=bind,source="$workingsetsdir/$projectname",target=/usr/app $projectname >/dev/null
+  elif [ "$container_running" = false ]; then
+    echo "devharbor : container $projectname found - not running"
     echo "devharbor : starting container"
     docker container start $projectname >/dev/null
+  else
+    echo "devharbor : container $projectname found - running"
+  fi
+
+  if [ "$attach" = true ]; then
     echo "devharbor : attaching to container"
     winpty docker attach $projectname
   fi

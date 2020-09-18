@@ -58,8 +58,17 @@ case "$command" in
   ;;
   start )
     projectname=$1; shift
+    attach=false
 
-    start $workingsetsdir $projectname
+    while getopts "a" start_opt; do
+      case ${start_opt} in
+        a)
+          attach=true
+        ;;
+      esac
+    done
+
+    start $workingsetsdir $projectname $attach
   ;;
   *)
     echo "ruby-dock : invalid command $subcommand" 1>&2
