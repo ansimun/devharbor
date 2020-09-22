@@ -8,10 +8,10 @@ function start {
   container_running=true
   container_existing=true;
 
-  id=$(docker ps -q -f name=ruby-dock)
+  id=$(docker ps -q -f name="$projectname")
   if [ -z "$id" ]; then
     container_running=false
-    id=$(docker ps -aq -f name=ruby-dock)
+    id=$(docker ps -aq -f name="$projectname")
     if [ -z "$id" ]; then
       container_existing=false;
     fi
