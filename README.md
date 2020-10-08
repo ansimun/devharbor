@@ -4,8 +4,10 @@ devharbor
 
 ## Synopsis
 
-    devharbor \<operation\> \<project-name\> [options]
-    devharbor help
+```bash
+devharbor <operation> <project-name> [options]
+devharbor help
+```
 
 ## Operations
 ### init
