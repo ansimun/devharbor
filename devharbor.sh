@@ -70,6 +70,10 @@ case "$command" in
 
     start $workingsetsdir $projectname $attach
   ;;
+  help )
+    print_help
+    exit 0
+  ;;
   *)
     echo "ruby-dock : invalid command $subcommand" 1>&2
     print_help

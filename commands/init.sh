@@ -32,6 +32,6 @@ function init {
   fi
 
   echo "devharbor : create image >>"
-  docker build -t $projectname -f $dockerfile .
+  docker build -t $projectname -f $dockerfile -
   echo "<<"
 }
