@@ -1,29 +1,29 @@
-##Name
+## Name
 
 devharbor
 
-##Synopsis
+## Synopsis
 
     devharbor \<operation\> \<project-name\> [options]
     devharbor help
 
-##Operations
-###init
+## Operations
+### init
     Initialize a new project and creates an image
     or updates an existing project.
-###start
+### start
     Start or attach to container.
-###help
+### help
     Print help
 
-##Init Options
-###-f
+## Init Options
+### -f
     Specify dockerfile to use.
     Take default (arch-default): devharbor init
     Use one of the existing    : devharbor init -f arch-ruby
     Use file from path         : devharbor init -f /any/path/mydockerfile.dockerfile
-###-s
+### -s
     Path to the source directory.
-##Start Options
-###-a
+## Start Options
+### -a
     Attach to container after starting it.
