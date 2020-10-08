@@ -75,7 +75,7 @@ case "$command" in
     exit 0
   ;;
   *)
-    echo "ruby-dock : invalid command $subcommand" 1>&2
+    echo "devharbor : invalid command $subcommand" 1>&2
     print_help
     exit 1
   ;;

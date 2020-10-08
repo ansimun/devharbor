@@ -1,15 +1,22 @@
 #!/usr/bin/bash
 
 function print_help {
-      echo "Usage: devharbor <operation> <project-name> [options]"
+      echo "Name"
+      echo "    devharbor"
+      echo ""
+      echo "Synopsis"
+      echo "    devharbor <operation> <project-name> [options]"
+      echo "    devharbor help"
       echo ""
       echo "Operations"
       echo "    init"
       echo "        Initialize a new project and creates an image"
+      echo "        or updates an existing project."
       echo "    start"
       echo "        Start or attach to container"
       echo "    help"
       echo "        Print this help"
+      echo ""
       echo "Init Options"
       echo "    -f"
       echo "        Specify dockerfile to use."
