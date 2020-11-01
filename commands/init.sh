@@ -35,7 +35,8 @@ EOF
   fi
 
   projectname=$(basename $projectfile)
-  echo "devharbor : create image >>"
+  echo "devharbor : create image $projectname with dockerfile $dockerfile"
+  echo ">>"
   docker build -t $projectname -f $dockerfile .
   echo "<<"
 }
