@@ -41,20 +41,17 @@ command=$1; shift
 case "$command" in
   init )
     projectname=$1; shift
-    dockerfile="$sources/docker/arch-default.dockerfile"
+    dockerfile=""
 
     while getopts "f:" init_opt; do
       case ${init_opt} in
         f)
           dockerfile="${OPTARG}"
-          if [ ! -f "$dockerfile" ]; then
-            dockerfile="$sources/docker/${OPTARG}.dockerfile"
-          fi
         ;;
       esac
     done
 
-    init $workingsetsdir $projectname $dockerfile
+    init $sources "$workingsetsdir/$projectname" $dockerfile
   ;;
   start )
     projectname=$1; shift
