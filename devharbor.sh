@@ -65,7 +65,7 @@ case "$command" in
       esac
     done
 
-    start $workingsetsdir $projectname $attach
+    start "$workingsetsdir/$projectname" $attach
   ;;
   help )
     print_help

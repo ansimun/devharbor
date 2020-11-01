@@ -1,9 +1,21 @@
 #!/usr/bin/bash
 
 function start {
-  workingsetsdir="$1"
-  projectname="$2"
-  attach="$3"
+  projectfile="$1"
+  attach="$2"
+  projectname=$(basename $projectfile)
+
+  if [ ! -f $projectfile ]; then
+    echo "devharbor : failed to load project $projectname, exit"
+    exit 1
+  fi
+
+  source $projectfile
+
+  if [ ! -d $DEVHARBOR_PROJECTDIR ]; then
+    echo "devharbor : project directory $DEVHARBOR_PROJECTDIR not existing, exit"
+    exit 1
+  fi
 
   container_running=true
   container_existing=true;
@@ -20,7 +32,7 @@ function start {
   if [ "$container_existing" = false ]; then
     echo "devharbor : container $projectname not found"
     echo "devharbor : creating and starting container"
-    docker run -it -d --name $projectname --mount type=bind,source="$workingsetsdir/$projectname",target=/usr/app $projectname >/dev/null
+    docker run -it -d --name $projectname --mount type=bind,source="$DEVHARBOR_PROJECTDIR",target=/usr/app $projectname >/dev/null
   elif [ "$container_running" = false ]; then
     echo "devharbor : container $projectname found - not running"
     echo "devharbor : starting container"
