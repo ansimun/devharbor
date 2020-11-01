@@ -47,8 +47,8 @@ DEVHARBOR_PROJECTDIR="$(pwd)"
 EOF
   fi
 
-#  projectname=$(basename $projectfile)
-#  echo "devharbor : create image >>"
-#  docker build -t $projectname -f $dockerfile .
-#  echo "<<"
+  projectname=$(basename $projectfile)
+  echo "devharbor : create image >>"
+  docker build -t $projectname -f $dockerfile .
+  echo "<<"
 }
