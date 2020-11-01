@@ -5,19 +5,6 @@ function init {
   projectfile="$2"
   dockerfile="$3"
 
-  # check for docker
-  if [ -z "$(command -v docker)" ]; then
-    echo "devharbor : docker not found, exit"
-    exit 1
-  fi
-
-  # check for docker daemon
-  # TODO: use docker info > /dev/null 2>&1 instead
-  if (! docker stats --no-stream > /dev/null 2>&1); then
-    echo "devharbor : docker not running, exit"
-    exit 1
-  fi
-
   if [ -z $dockerfile ]; then
     files=($(ls Dockerfile *.dockerfile))
     if [ ${#files[@]} -eq 0 ]; then
