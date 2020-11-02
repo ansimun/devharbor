@@ -18,7 +18,7 @@ function print_help {
       echo "    -f"
       echo "        Specify dockerfile to use."
       echo "        From working directory      : devharbor init"
-      echo "            Searches for '*.dockerfile' or just 'Dockerfile'"
+      echo "            Takes first matching 'Dockerfile' or '*.dockerfile'"
       echo "        One of the existing         : devharbor init -f arch-ruby"
       echo "        From path                   : devharbor init -f /any/path/mydockerfile.dockerfile"
       echo ""

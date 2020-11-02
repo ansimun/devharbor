@@ -11,8 +11,7 @@ devharbor help
 
 ## Operations
 ### init
-    Initialize a new project and creates an image
-    or updates an existing project.
+    Initialize a new project and creates an image.
 ### start
     Start or attach to container.
 ### help
@@ -21,11 +20,14 @@ devharbor help
 ## Init Options
 ### -f
     Specify dockerfile to use.
-    Take default (arch-default): devharbor init
-    Use one of the existing    : devharbor init -f arch-ruby
-    Use file from path         : devharbor init -f /any/path/mydockerfile.dockerfile
-### -s
-    Path to the source directory.
+    - devharbor init
+        Takes dockerfile from working directory.
+        First matching of 'Dockerfile' or '*.dockerfile'
+    - devharbor init -f arch-ruby
+        Takes one of the existing dockerfiles.
+    - devharbor init -f /any/path/mydockerfile.dockerfile
+        Takes dockerfile from given path
+
 ## Start Options
 ### -a
     Attach to container after starting it.
