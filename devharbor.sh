@@ -19,6 +19,7 @@ pushd "$sources/commands" >/dev/null
 source print_help.sh
 source init.sh
 source start.sh
+source remove.sh
 popd >/dev/null
 
 while getopts ":h" opt; do
@@ -66,6 +67,10 @@ case "$command" in
     done
 
     start "$workingsetsdir/$projectname" $attach
+  ;;
+  remove )
+    projectname=$1; shift
+    remove "$workingsetsdir/$projectname"
   ;;
   help )
     print_help
