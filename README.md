@@ -11,11 +11,11 @@ devharbor help
 
 ## Operations
 ### init
-    Initialize a new project and creates an image.
+    Initialize a new project and create new image.
 ### start
     Start or attach to container.
-### help
-    Print help
+### remove
+    Remove project + corresponding image
 
 ## Init Options
 ### -f
