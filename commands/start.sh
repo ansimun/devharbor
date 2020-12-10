@@ -3,6 +3,7 @@
 function start {
   projectfile="$1"
   attach="$2"
+  keep="$3"
   projectname=$(basename $projectfile)
 
   if [ ! -f $projectfile ]; then
@@ -32,7 +33,11 @@ function start {
   if [ "$container_existing" = false ]; then
     echo "devharbor : container $projectname not found"
     echo "devharbor : creating and starting container"
-    docker run -it -d --name $projectname --mount type=bind,source="$DEVHARBOR_PROJECTDIR",target=/usr/app $projectname >/dev/null
+    if [ "$keep" = true ]; then
+      docker run -it -d --name $projectname --mount type=bind,source="$DEVHARBOR_PROJECTDIR",target=/usr/app $projectname >/dev/null
+    else
+      docker run --rm -it -d --name $projectname --mount type=bind,source="$DEVHARBOR_PROJECTDIR",target=/usr/app $projectname >/dev/null
+    fi
   elif [ "$container_running" = false ]; then
     echo "devharbor : container $projectname found - not running"
     echo "devharbor : starting container"

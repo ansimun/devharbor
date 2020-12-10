@@ -57,16 +57,20 @@ case "$command" in
   start )
     projectname=$1; shift
     attach=false
+    keep=false
 
-    while getopts "a" start_opt; do
+    while getopts "ak" start_opt; do
       case ${start_opt} in
         a)
           attach=true
         ;;
+        k)
+          keep=true
+        ;;
       esac
     done
 
-    start "$workingsetsdir/$projectname" $attach
+    start "$workingsetsdir/$projectname" $attach $keep
   ;;
   remove )
     projectname=$1; shift
