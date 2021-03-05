@@ -1,17 +1,18 @@
 #!/usr/bin/bash
 
-# check for docker
-if [ -z "$(command -v docker)" ]; then
-  echo "devharbor : docker not found, exit"
-  exit 1
-fi
+function dockertest {
+  if [ -z "$(command -v docker)" ]; then
+    echo "devharbor : docker not found, exit"
+    exit 1
+  fi
 
-# check for docker daemon
-# TODO: use docker info > /dev/null 2>&1 instead
-if (! docker stats --no-stream > /dev/null 2>&1); then
-  echo "devharbor : docker not running, exit"
-  exit 1
-fi
+  # check for docker daemon
+  # TODO: use docker info > /dev/null 2>&1 instead
+  if (! docker stats --no-stream > /dev/null 2>&1); then
+    echo "devharbor : docker not running, exit"
+    exit 1
+  fi
+}
 
 sources="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
@@ -41,6 +42,7 @@ command=$1; shift
 
 case "$command" in
   init )
+    dockertest
     projectname=$1; shift
     dockerfile=""
 
@@ -55,6 +57,7 @@ case "$command" in
     init $sources "$workingsetsdir/$projectname" $dockerfile
   ;;
   start )
+    dockertest
     projectname=$1; shift
     attach=false
     keep=false
@@ -73,6 +76,7 @@ case "$command" in
     start "$workingsetsdir/$projectname" $attach $keep
   ;;
   remove )
+    dockertest
     projectname=$1; shift
     remove "$workingsetsdir/$projectname"
   ;;
